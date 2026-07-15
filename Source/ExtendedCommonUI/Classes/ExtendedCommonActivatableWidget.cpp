@@ -105,7 +105,7 @@ void UExtendedCommonActivatableWidget::RegisterInputActionBinding(FDataTableRowH
 	BindArgs.bDisplayInActionBar = bInDisplayInActionBar;
 	BindArgs.InputMode = InputMode;
 
-	BindingHandle.Handle = RegisterUIActionBinding(BindArgs);
+	BindingHandle.Handle = UCommonUserWidget::RegisterUIActionBinding(BindArgs);
 	BindingHandles.Add(BindingHandle.Handle);
 }
 
@@ -128,6 +128,18 @@ void UExtendedCommonActivatableWidget::UnregisterAllInputActionBindings()
 		}
 	}
 	BindingHandles.Empty();
+}
+
+void UExtendedCommonActivatableWidget::RegisterUIActionBinding(const FBindUIActionArgs& BindActionArgs, FUIActionBindingHandle& BindingHandle)
+{
+	if (BindingHandle.IsValid())
+	{
+		AddActionBinding(BindingHandle);
+	}
+	else
+	{
+		BindingHandle = UCommonUserWidget::RegisterUIActionBinding(BindActionArgs);
+	}
 }
 
 TOptional<FUIInputConfig> UExtendedCommonActivatableWidget::GetDesiredInputConfig() const

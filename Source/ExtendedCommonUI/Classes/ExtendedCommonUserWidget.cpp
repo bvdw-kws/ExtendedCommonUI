@@ -24,3 +24,15 @@ bool UExtendedCommonUserWidget::IsOwningLocalPlayer(int32 PlayerIndex) const
 {
 	return PlayerIndex != INDEX_NONE && PlayerIndex == GetOwningLocalPlayerIndex();
 }
+
+void UExtendedCommonUserWidget::RegisterUIActionBinding(const FBindUIActionArgs& BindActionArgs, FUIActionBindingHandle& BindingHandle)
+{
+	if (BindingHandle.IsValid())
+	{
+		AddActionBinding(BindingHandle);
+	}
+	else
+	{
+		BindingHandle = UCommonUserWidget::RegisterUIActionBinding(BindActionArgs);
+	}
+}

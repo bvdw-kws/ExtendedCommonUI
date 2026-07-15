@@ -53,6 +53,8 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = ExtendedActivatableWidget)
 	void UnregisterAllInputActionBindings();
 
+	void RegisterUIActionBinding(const FBindUIActionArgs& BindActionArgs, FUIActionBindingHandle& BindingHandle);
+	
 protected:
 	UFUNCTION(BlueprintPure)
 	int32 GetOwningLocalPlayerIndex() const;

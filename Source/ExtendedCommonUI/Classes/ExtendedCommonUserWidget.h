@@ -24,4 +24,6 @@ protected:
 	
 	UFUNCTION(BlueprintPure)
 	bool IsOwningLocalPlayer(int32 PlayerIndex) const;
+
+	void RegisterUIActionBinding(const FBindUIActionArgs& BindActionArgs, FUIActionBindingHandle& BindingHandle);
 };
