@@ -6,6 +6,7 @@
 
 #include "ExtendedCommonButtonBase.h"
 #include "CommonActionWidget.h"
+#include "CommonRichTextBlock.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(ExtendedCommonButtonBase)
 
@@ -34,7 +35,7 @@ void UExtendedCommonButtonBase::SetButtonText(const FText& InText)
 
 void UExtendedCommonButtonBase::RefreshButtonText()
 {
-	if (bOverride_ButtonText || ButtonText.IsEmpty())
+	if (!bOverride_ButtonText || ButtonText.IsEmpty())
 	{
 		if (InputActionWidget)
 		{

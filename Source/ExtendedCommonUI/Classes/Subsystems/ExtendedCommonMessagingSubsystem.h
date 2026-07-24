@@ -18,7 +18,7 @@ class UCommonGameDialog;
 class UCommonGameDialogDescriptor;
 class UObject;
 
-UE_DECLARE_GAMEPLAY_TAG_EXTERN(TAG_UI_LAYER_MODAL);
+EXTENDEDCOMMONUI_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(TAG_UI_LAYER_MODAL);
 
 /**
  * 

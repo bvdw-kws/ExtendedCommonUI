@@ -10,9 +10,6 @@
 
 #include "ExtendedCommonButtonBase.generated.h"
 
-class UObject;
-struct FFrame;
-
 UCLASS(Abstract, BlueprintType, Blueprintable)
 class EXTENDEDCOMMONUI_API UExtendedCommonButtonBase : public UCommonButtonBase
 {
