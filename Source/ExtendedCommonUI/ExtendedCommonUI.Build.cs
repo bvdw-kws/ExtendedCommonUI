@@ -24,6 +24,7 @@ public class ExtendedCommonUI : ModuleRules
 			"CommonGame",
 			"InputCore",
 			"EnhancedInput",
+			"DeveloperSettings",
 		});
 
 		// Uncomment if you are using Slate UI

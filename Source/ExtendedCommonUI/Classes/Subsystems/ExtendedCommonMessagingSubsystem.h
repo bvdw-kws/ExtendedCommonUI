@@ -37,12 +37,6 @@ public:
 	virtual void ShowError(UCommonGameDialogDescriptor* DialogDescriptor, FCommonMessagingResultDelegate ResultCallback = FCommonMessagingResultDelegate()) override;
 
 private:
-	UPROPERTY()
-	TSubclassOf<UCommonGameDialog> ConfirmationDialogClassPtr;
-
-	UPROPERTY()
-	TSubclassOf<UCommonGameDialog> ErrorDialogClassPtr;
-
 	UPROPERTY(config)
 	TSoftClassPtr<UCommonGameDialog> ConfirmationDialogClass;
 

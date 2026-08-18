@@ -19,9 +19,6 @@ UE_DEFINE_GAMEPLAY_TAG(TAG_UI_LAYER_MODAL, "UI.Layer.Modal");
 void UExtendedCommonMessagingSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
-
-	ConfirmationDialogClassPtr = ConfirmationDialogClass.LoadSynchronous();
-	ErrorDialogClassPtr = ErrorDialogClass.LoadSynchronous();
 }
 
 void UExtendedCommonMessagingSubsystem::ShowConfirmation(UCommonGameDialogDescriptor* DialogDescriptor, FCommonMessagingResultDelegate ResultCallback)
@@ -30,8 +27,16 @@ void UExtendedCommonMessagingSubsystem::ShowConfirmation(UCommonGameDialogDescri
 	{
 		if (UPrimaryGameLayout* RootLayout = LocalPlayer->GetRootUILayout())
 		{
-			RootLayout->PushWidgetToLayerStack<UCommonGameDialog>(TAG_UI_LAYER_MODAL, ConfirmationDialogClassPtr, [DialogDescriptor, ResultCallback](UCommonGameDialog& Dialog) {
-				Dialog.SetupDialog(DialogDescriptor, ResultCallback);
+			RootLayout->PushWidgetToLayerStackAsync<UCommonGameDialog>(TAG_UI_LAYER_MODAL, true, ConfirmationDialogClass, 
+				[DialogDescriptor, ResultCallback](EAsyncWidgetLayerState State, UCommonActivatableWidget* Widget)
+			{
+				if (UCommonGameDialog* Dialog = Cast<UCommonGameDialog>(Widget))
+				{
+					if (State == EAsyncWidgetLayerState::Initialize)
+					{
+						Dialog->SetupDialog(DialogDescriptor, ResultCallback);
+					}
+				}
 			});
 		}
 	}
@@ -43,8 +48,16 @@ void UExtendedCommonMessagingSubsystem::ShowError(UCommonGameDialogDescriptor* D
 	{
 		if (UPrimaryGameLayout* RootLayout = LocalPlayer->GetRootUILayout())
 		{
-			RootLayout->PushWidgetToLayerStack<UCommonGameDialog>(TAG_UI_LAYER_MODAL, ErrorDialogClassPtr, [DialogDescriptor, ResultCallback](UCommonGameDialog& Dialog) {
-				Dialog.SetupDialog(DialogDescriptor, ResultCallback);
+			RootLayout->PushWidgetToLayerStackAsync<UCommonGameDialog>(TAG_UI_LAYER_MODAL, true, ErrorDialogClass, 
+				[DialogDescriptor, ResultCallback](EAsyncWidgetLayerState State, UCommonActivatableWidget* Widget) 
+			{
+				if (UCommonGameDialog* Dialog = Cast<UCommonGameDialog>(Widget))
+				{
+					if (State == EAsyncWidgetLayerState::Initialize)
+					{
+						Dialog->SetupDialog(DialogDescriptor, ResultCallback);
+					}
+				}
 			});
 		}
 	}
